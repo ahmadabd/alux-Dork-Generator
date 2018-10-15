@@ -6,13 +6,15 @@ using Gtk;
 
 namespace box{
     public class boxes:Gtk.Box{
-	public string contentBox;
+
+	Gtk.TextView textBox;
 
 	public boxes(Gtk.Orientation or, int space, string labelContent){
+
 	    Object(orientation:or, spacing:space);
             Gtk.Label nameLabel = new Gtk.Label(labelContent);
 
-            Gtk.TextView textBox = new TextView ();
+            textBox = new TextView ();
             textBox.editable = true;
             textBox.cursor_visible = false;
             textBox.set_wrap_mode (Gtk.WrapMode.WORD);
@@ -24,7 +26,13 @@ namespace box{
     	    this.pack_start(nameLabel, false, false, 10);
 	    this.pack_end(scroll, true, true, 10);
 	
-	    contentBox = textBox.buffer.text;
+	    //this.contentBox = textBox.buffer.text;
+	}
+
+
+	public string content(){
+
+	    return textBox.buffer.text;
 	}
     }
 }
