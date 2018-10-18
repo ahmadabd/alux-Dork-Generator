@@ -7,7 +7,7 @@ using Gtk;
 namespace box{
     public class boxes:Gtk.Box{
 
-	Gtk.TextView textBox;
+	private Gtk.TextView textBox;
 
 	public boxes(Gtk.Orientation or, int space, string labelContent){
 
