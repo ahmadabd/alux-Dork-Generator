@@ -16,6 +16,7 @@ namespace box{
 
             textBox = new TextView ();
             textBox.editable = true;
+	    //textBox.border_width = 10;
             textBox.cursor_visible = false;
             textBox.set_wrap_mode (Gtk.WrapMode.WORD);
 
