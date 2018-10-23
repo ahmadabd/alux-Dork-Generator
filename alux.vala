@@ -22,23 +22,10 @@ public class aluxDG : Gtk.Window{
 		bBox.pack_start (button, true, false, 50);
 
 		Gtk.Box swBox = new Gtk.Box(Orientation.VERTICAL, 10);
-		Gtk.Box lbUrlBox = new Gtk.Box(Orientation.HORIZONTAL, 10);	// Contains label and switch of inurl Button
-		Gtk.Box lbSiteBox = new Gtk.Box(Orientation.HORIZONTAL, 10);	// Contains label and switch of site Button
 
-		Gtk.Label urlLabel = new Gtk.Label ("inurl :");
-		Gtk.Label siteLabel = new Gtk.Label ("site :");
-
-		switchBtn swUrl = new switchBtn();
-		switchBtn swSite = new switchBtn();
-
-		lbUrlBox.pack_start(urlLabel, true, false, 0); 			// Adding label and switch to HORIZONTAL box
-		lbUrlBox.pack_start(swUrl.sw(), true, false, 0);	
-
-		lbSiteBox.pack_start(siteLabel, true, false, 0);		// Adding label and switch to HORIZONTAL box
-		lbSiteBox.pack_start(swSite.sw(), true, false, 0);
-		
-		swBox.pack_start(lbUrlBox, true, false, 0);			// Adding lbUrlBox and lbUrlBox to a VERTICAL box
-		swBox.pack_start(lbSiteBox, true, false, 0);
+		swBox.pack_start(switchLabelDesigner("inurl :"), true, false, 0);		// Adding lbUrlBox and lbUrlBox to a VERTICAL box
+		swBox.pack_start(switchLabelDesigner("site :"), true, false, 0);
+		swBox.pack_start(switchLabelDesigner("type :"), true, false, 0);
 
 		bBox.pack_end(swBox, true, false, 0);				// Adding swBox to end of button box
 
@@ -56,6 +43,21 @@ public class aluxDG : Gtk.Window{
 		mainBox.pack_end(bBox, true, false, 10);	
 
 	        this.add (mainBox);
+	}
+
+	
+	private Gtk.Box switchLabelDesigner(string labelName){
+
+		Gtk.Box lbBox = new Gtk.Box(Orientation.HORIZONTAL, 10);     // Contains label and switch of inurl Button
+
+                Gtk.Label lb = new Gtk.Label (labelName);
+
+                switchBtn sw = new switchBtn();
+
+                lbBox.pack_start(lb, true, false, 0);                  // Adding label and switch to HORIZONTAL box
+                lbBox.pack_start(sw.sw(), true, false, 0);
+
+		return lbBox;
 	}
 
 
