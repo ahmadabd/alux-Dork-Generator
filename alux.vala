@@ -10,6 +10,8 @@ public class aluxDG : Gtk.Window{
 	private	boxes pt2;
 	private boxes res;
 
+	switchBtn sw = new switchBtn();
+	
 	public aluxDG(){
 	
 		this.title = "aluxDG";
@@ -23,9 +25,9 @@ public class aluxDG : Gtk.Window{
 
 		Gtk.Box swBox = new Gtk.Box(Orientation.VERTICAL, 10);
 
-		swBox.pack_start(switchLabelDesigner("inurl :"), true, false, 0);		// Adding lbUrlBox and lbUrlBox to a VERTICAL box
-		swBox.pack_start(switchLabelDesigner("site :"), true, false, 0);
-		swBox.pack_start(switchLabelDesigner("type :"), true, false, 0);
+		//swBox.pack_start(switchLabelDesigner("site :"), true, false, 0);
+		//swBox.pack_start(switchLabelDesigner("type :"), true, false, 0);
+		swBox.pack_start(switchLabelDesigner("inurl :"), true, false, 0);		
 
 		bBox.pack_end(swBox, true, false, 0);				// Adding swBox to end of button box
 
@@ -52,10 +54,13 @@ public class aluxDG : Gtk.Window{
 
                 Gtk.Label lb = new Gtk.Label (labelName);
 
-                switchBtn sw = new switchBtn();
-
                 lbBox.pack_start(lb, true, false, 0);                  // Adding label and switch to HORIZONTAL box
                 lbBox.pack_start(sw.sw(), true, false, 0);
+ 		if(labelName != "inurl :"){
+
+                        Gtk.Entry entry = new Gtk.Entry ();
+                        lbBox.pack_start(entry, true, false, 0);
+                }
 
 		return lbBox;
 	}
@@ -70,10 +75,12 @@ public class aluxDG : Gtk.Window{
 		string result;
 		int rand = Random.int_range(1, 10000);
 
+		int mode = sw.returnMode();
+
 		makeResultDir();  							// Makes result dir
 
 		var file = File.new_for_path (@"result/result$rand.txt");    		// Making File
-		
+
 		{ // File Block
 		    var file_stream = file.create (FileCreateFlags.NONE);  		// Creating File
 
@@ -87,9 +94,17 @@ public class aluxDG : Gtk.Window{
 			for(int j = 0; j < ptList.length; j++){
 			    for(int k = 0; k < pt2List.length; k++){
 			        for(int q = 0; q < resList.length; q++){
-			 
-				    result = nameList[i] + ptList[j] + pt2List[k] + resList[q];
-	            		    data_stream.put_string (result + "\n");  		// Writing result on file
+
+				    if(mode == 1){
+				    
+					result = "inurl:" + nameList[i] + ptList[j] + pt2List[k] + resList[q];
+	            		        data_stream.put_string (result + "\n");  		// Writing result on file
+				    }
+				    else{
+
+					result = nameList[i] + ptList[j] + pt2List[k] + resList[q];
+                                        data_stream.put_string (result + "\n");                 // Writing result on file
+				    }
 				}
 			    }
 			}
@@ -108,7 +123,7 @@ public class aluxDG : Gtk.Window{
 		}
 	}
 
-	
+
 	public static int main(string[] args){
 
 		Gtk.init(ref args);
