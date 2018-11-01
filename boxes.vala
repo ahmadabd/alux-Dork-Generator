@@ -24,6 +24,8 @@ namespace box{
             scroll.set_policy (PolicyType.AUTOMATIC, PolicyType.AUTOMATIC);
             scroll.add (textBox);
 	    
+	    scroll.get_style_context().add_class("txtBox");
+
     	    this.pack_start(nameLabel, false, false, 10);
 	    this.pack_end(scroll, true, true, 10);
 	

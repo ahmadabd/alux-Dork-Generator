@@ -19,7 +19,23 @@ public class aluxDG : Gtk.Window{
 		this.destroy.connect(Gtk.main_quit);
 		this.set_default_size(1000, 450);		
 
+		// Add css configs:
+		var css_provider = new Gtk.CssProvider();
+        	string path = "style.css";
+
+	        // test if the css file exist
+        	if (FileUtils.test (path, FileTest.EXISTS))
+        	{
+            		try {
+                		css_provider.load_from_path(path);
+		                Gtk.StyleContext.add_provider_for_screen(screen, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
+            		} catch (Error e) {
+                		error ("Cannot load CSS stylesheet: %s", e.message);
+            		}
+        	}
+
 		Gtk.Button button = new Gtk.Button.with_label ("Start Generate");
+		button.get_style_context().add_class("gnBtn");
 		Gtk.Box bBox = new Gtk.Box(Orientation.HORIZONTAL, 10);
 		bBox.pack_start (button, true, false, 50);
 
